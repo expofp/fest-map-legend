@@ -170,10 +170,10 @@ class FestMapLegend extends HTMLElement {
         this.showBtn.addEventListener("click", () => this.toggleModal());
         this.closeBtn.addEventListener("click", () => this.toggleModal());
 
-        this.modal.style.zIndex = this.getAttribute("modal-index") ?? "1";
-        this.modalTitle.innerText = this.getAttribute("title") ?? "";
-        this.showBtn.innerText = this.getAttribute("btn-text") ?? "Legend";
-        this.showBtn.style.zIndex = this.getAttribute("btn-index") ?? "0";
+        this.modal.style.zIndex = this.getAttribute("modal-index") ?? "2";
+        this.modalTitle.innerText = this.getAttribute("title") ?? "Map Legend";
+        this.showBtn.innerText = this.getAttribute("btn-text") ?? "Show Legend";
+        this.showBtn.style.zIndex = this.getAttribute("btn-index") ?? "1";
 
         const items = this.getAttribute("items");
         if (items) {
@@ -194,11 +194,11 @@ class FestMapLegend extends HTMLElement {
             .map(
                 (item) => `
                     <div class="fest-legend-item">
-                    <div class="fest-legend-item-color" style="background-color: ${item.color}"></div>
-                    <div class="fest-legend-item-content">
-                        <strong>${item.name}</strong>
-                        ${item.desc ? `<span>${item.desc}</span>` : ""}
-                    </div>
+                        <div class="fest-legend-item-color" style="background-color: ${item.color}"></div>
+                        <div class="fest-legend-item-content">
+                            <strong>${item.name}</strong>
+                            ${item.desc ? `<span>${item.desc}</span>` : ""}
+                        </div>
                     </div>
                  `
             )

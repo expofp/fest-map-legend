@@ -7,7 +7,8 @@ export default defineConfig({
         lib: {
             entry: resolve(__dirname, "src/index.ts"),
             name: "FestMapLegend",
-            fileName: "index"
+            fileName: "index",
+            format: ["es"]
         },
         minify: "terser",
         terserOptions: {
@@ -15,8 +16,7 @@ export default defineConfig({
                 toplevel: true
             },
             compress: {
-                drop_console: false,
-                drop_debugger: true,
+                drop_console: true,
                 pure_funcs: ["console.log"]
             },
             format: {

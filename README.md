@@ -4,12 +4,12 @@ Web Component to show legend on Fest map
 
 ## 📦 Install
 
-    yarn add @fest/map-legend
+    yarn add fest-map-legend
 
 ## 🔨 Usage
 
     import React from "react";
-    import "@fest/map-legend";
+    import "fest-map-legend";
 
     const App = () => (
       <>

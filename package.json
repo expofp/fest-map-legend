@@ -3,11 +3,12 @@
     "author": "Pranas.NET",
     "license": "MIT",
     "version": "0.1.0",
+    "description": "Web Component to show legend on Fest map",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [
-        "dist/*",
+        "dist/",
         "README.md"
     ],
     "scripts": {

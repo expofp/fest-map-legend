@@ -1,6 +1,6 @@
 /// <reference path="./index.d.ts" />
 
-class MapLegend extends HTMLElement {
+class FestMapLegend extends HTMLElement {
     private modal: HTMLDivElement;
     private modalTitle: HTMLDivElement;
     private modalContent: HTMLDivElement;
@@ -12,18 +12,31 @@ class MapLegend extends HTMLElement {
     }
 
     attributeChangedCallback(name: string, _: string, newValue: string) {
-        if (name === "title") this.modalTitle.innerText = newValue;
-        if (name === "btn-text") this.showBtn.innerText = newValue;
-        if (name === "items") {
-            const items = JSON.parse(newValue) as LegendItem[];
-            this.populateItems(items);
+        if (newValue === null) return;
+
+        switch (name) {
+            case "title":
+                this.modalTitle.innerText = newValue;
+                break;
+            case "btn-text":
+                this.showBtn.innerText = newValue;
+                break;
+            case "items":
+                try {
+                    const items = JSON.parse(newValue) as LegendItem[];
+                    this.populateItems(items);
+                } catch (e) {
+                    console.error("Error parsing items:", e);
+                }
+                break;
+            default:
+                break;
         }
     }
 
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
-        const template = document.createElement("template");
 
         shadow.innerHTML = `
             <style>
@@ -148,8 +161,6 @@ class MapLegend extends HTMLElement {
             </div>
         `;
 
-        shadow.appendChild(template.content.cloneNode(true));
-
         this.modal = shadow.querySelector(".fest-legend-modal") as HTMLDivElement;
         this.modalTitle = shadow.querySelector(".fest-legend-modal-title") as HTMLDivElement;
         this.showBtn = shadow.querySelector(".fest-legend-btn-show") as HTMLButtonElement;
@@ -158,12 +169,20 @@ class MapLegend extends HTMLElement {
 
         this.showBtn.addEventListener("click", () => this.toggleModal());
         this.closeBtn.addEventListener("click", () => this.toggleModal());
-        this.modal.style.zIndex = this.getAttribute("modal-index") || "1";
-        this.modalTitle.innerText = this.getAttribute("title") || "";
-        this.showBtn.innerText = this.getAttribute("btn-text") || "Legend";
-        this.showBtn.style.zIndex = this.getAttribute("btn-index") || "0";
+
+        this.modal.style.zIndex = this.getAttribute("modal-index") ?? "1";
+        this.modalTitle.innerText = this.getAttribute("title") ?? "";
+        this.showBtn.innerText = this.getAttribute("btn-text") ?? "Legend";
+        this.showBtn.style.zIndex = this.getAttribute("btn-index") ?? "0";
+
         const items = this.getAttribute("items");
-        if (items) this.populateItems(JSON.parse(items));
+        if (items) {
+            try {
+                this.populateItems(JSON.parse(items));
+            } catch (e) {
+                console.error("Error parsing items:", e);
+            }
+        }
     }
 
     toggleModal() {
@@ -171,23 +190,20 @@ class MapLegend extends HTMLElement {
     }
 
     populateItems(items: LegendItem[]) {
-        this.modalContent.innerHTML = "";
-
-        items.forEach((item) => {
-            const itemEl = document.createElement("div");
-            itemEl.className = "fest-legend-item";
-
-            itemEl.innerHTML = `
-                <div class="fest-legend-item-color" style="background-color: ${item.color}"></div>
-                <div class="fest-legend-item-content">
-                    <strong>${item.name}</strong>
-                    ${item.desc ? `<span>${item.desc}</span>` : ""}
-                </div>
-            `;
-
-            this.modalContent.appendChild(itemEl);
-        });
+        this.modalContent.innerHTML = items
+            .map(
+                (item) => `
+                    <div class="fest-legend-item">
+                    <div class="fest-legend-item-color" style="background-color: ${item.color}"></div>
+                    <div class="fest-legend-item-content">
+                        <strong>${item.name}</strong>
+                        ${item.desc ? `<span>${item.desc}</span>` : ""}
+                    </div>
+                    </div>
+                 `
+            )
+            .join("");
     }
 }
 
-customElements.define("fest-map-legend", MapLegend);
+customElements.define("fest-map-legend", FestMapLegend);

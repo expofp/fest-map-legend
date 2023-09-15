@@ -2,7 +2,7 @@
     "name": "fest-map-legend",
     "author": "Pranas.NET",
     "license": "MIT",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Web Component to show legend on Fest map",
     "type": "module",
     "main": "dist/index.js",

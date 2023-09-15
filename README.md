@@ -17,6 +17,8 @@ Web Component to show legend on Fest map
           title="Map Legend"
           btn-text="Show legend"
           btn-index="20"
+          btn-bg-color="#7E94A9"
+          btn-text-color="#FFFFFF"
           modal-index="999"
           items='[
             {

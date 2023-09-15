@@ -11,6 +11,15 @@ class FestMapLegend extends HTMLElement {
         return ["title", "items", "btn-text", "btn-index", "btn-bg-color", "btn-text-color", "modal-index"];
     }
 
+    connectedCallback() {
+        this.modal.style.zIndex = this.getAttribute("modal-index") ?? "2";
+        this.modalTitle.innerText = this.getAttribute("title") ?? "Map Legend";
+        this.showBtn.innerText = this.getAttribute("btn-text") ?? "Show Legend";
+        this.showBtn.style.zIndex = this.getAttribute("btn-index") ?? "1";
+        this.showBtn.style.backgroundColor = this.getAttribute("btn-bg-color") ?? "#ffffff";
+        this.showBtn.style.color = this.getAttribute("btn-text-color") ?? "#333333";
+    }
+
     attributeChangedCallback(name: string, _: string, newValue: string) {
         if (newValue === null) return;
 
@@ -167,13 +176,6 @@ class FestMapLegend extends HTMLElement {
 
         this.showBtn.addEventListener("click", () => this.toggleModal());
         this.closeBtn.addEventListener("click", () => this.toggleModal());
-
-        this.modal.style.zIndex = this.getAttribute("modal-index") ?? "2";
-        this.modalTitle.innerText = this.getAttribute("title") ?? "Map Legend";
-        this.showBtn.innerText = this.getAttribute("btn-text") ?? "Show Legend";
-        this.showBtn.style.zIndex = this.getAttribute("btn-index") ?? "1";
-        this.showBtn.style.backgroundColor = this.getAttribute("btn-bg-color") ?? "#ffffff";
-        this.showBtn.style.color = this.getAttribute("btn-text-color") ?? "#333333";
 
         const items = this.getAttribute("items");
         if (items) {

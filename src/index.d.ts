@@ -11,6 +11,8 @@ declare namespace JSX {
             items?: string;
             "btn-text"?: string;
             "btn-index"?: string;
+            "btn-bg-color"?: string;
+            "btn-text-color"?: string;
             "modal-index"?: string;
         };
     }

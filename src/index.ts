@@ -8,7 +8,7 @@ class FestMapLegend extends HTMLElement {
     private closeBtn: HTMLButtonElement;
 
     static get observedAttributes() {
-        return ["title", "items", "btn-text", "btn-index", "modal-index"];
+        return ["title", "items", "btn-text", "btn-index", "btn-bg-color", "btn-text-color", "modal-index"];
     }
 
     attributeChangedCallback(name: string, _: string, newValue: string) {
@@ -48,9 +48,7 @@ class FestMapLegend extends HTMLElement {
                     padding: 0.4rem 0.6rem;
                     border: 0;
                     border-radius: 8px;
-                    background: #ffffff;
                     box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.10);
-                    color: #333333;
                     font-family: inherit;
                     font-size: 0.8rem;
                     font-weight: 500;
@@ -58,7 +56,7 @@ class FestMapLegend extends HTMLElement {
                     user-select: none;
                 }
                 .fest-legend-btn-show:hover {
-                    background: #F6F6F6;
+                    opacity: 0.9;
                 }
                 .fest-legend-modal {
                     position: absolute;
@@ -174,6 +172,8 @@ class FestMapLegend extends HTMLElement {
         this.modalTitle.innerText = this.getAttribute("title") ?? "Map Legend";
         this.showBtn.innerText = this.getAttribute("btn-text") ?? "Show Legend";
         this.showBtn.style.zIndex = this.getAttribute("btn-index") ?? "1";
+        this.showBtn.style.backgroundColor = this.getAttribute("btn-bg-color") ?? "#ffffff";
+        this.showBtn.style.color = this.getAttribute("btn-text-color") ?? "#333333";
 
         const items = this.getAttribute("items");
         if (items) {

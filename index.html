@@ -13,6 +13,7 @@
                 padding: 0;
                 font-family: "Montserrat", sans-serif;
                 font-size: 16px;
+                overflow: hidden;
             }
             #app {
                 margin: 0;
@@ -40,29 +41,49 @@
                 background: #f9f9f9;
                 z-index: 20;
             }
+            iframe {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                border: 0;
+            }
         </style>
         <div id="app">
-            <div class="map"></div>
-            <div class="overlay-panel"></div>
+            <iframe src="https://fest-digitalx.expofp.com/"></iframe>
+            <!-- <div class="map"></div>
+            <div class="overlay-panel"></div> -->
 
             <fest-map-legend
-				title="Map Legend"
-				btn-text="Show legend"
-				btn-index="20"
-				modal-index="999"
-				items='[
-					{
-						"name": "Park",
-						"desc": "Green space for recreation and relaxation, often with paths and benches.",
-						"color": "#4CB2E6"
-					},
-					{
-						"name": "Picnic Area",
-						"desc": "Designated spot with tables for outdoor meals.",
-						"color": "#FFC014"
-					}
-				]'
-			></fest-map-legend>
+                title="Legende Quartiere"
+                btn-text="Legende"
+                btn-index="10"
+                btn-bg-color="#7E94A9"
+                btn-text-color="#ffffff"
+                modal-index="999"
+                items='[
+                {
+                "name": "QUARTIER MEDIAPARK",
+                "desc": "Der Ort für die großen Momente der DIGITAL X 2023.",
+                "color": "#4CB2E6"
+                },
+                {
+                "name": "QUARTIER FRIESENVIERTEL",
+                "desc": "Interaktion und Networking stehen hier im Fokus.",
+                "color": "#FFC014"
+                },
+                {
+                "name": "QUARTIER STADTGARTEN",
+                "desc": "Treffen Sie die Erfinder und Macher von morgen.",
+                "color": "#E50E7E"
+                },
+                {
+                "name": "QUARTIER BELGSICHES VIERTEL",
+                "desc": "Ideen und Lösungen der etwas anderen Art.",
+                "color": "#469308"
+                }
+                ]'
+            ></fest-map-legend>
         </div>
         <script type="module" src="/src/index.ts"></script>
     </body>
